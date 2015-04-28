@@ -1,7 +1,7 @@
 // Names: Chris Lucian && Chad Davies
 // Class: CS 537
-// Date: 3/29/2015
-// Assignment: 2
+// Date: 4/28/2015
+// Assignment: 3
 
 #include <stdio.h>
 #include <string.h>
@@ -24,12 +24,14 @@ int main(int argc, char *argv[]) {
     char buffer[bufferLength];
 
     // Validate the correct number of arguments have been passed to the server
-    if (argc < 2) {
-        fprintf(stderr,"Usage: %s <port>\n", argv[0]);
+    if (argc < 3) {
+        fprintf(stderr,"Usage: %s <port> <test_mode>\n", argv[0]);
         exit(1);
     }
 
     int port = atoi(argv[1]);
+    char* test_mode = argv[2];
+    printf("test_mode: %s", test_mode);
 
     // Initialize server socket information.
     serverAddress.sin_family = AF_INET;

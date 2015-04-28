@@ -1,7 +1,7 @@
 // Names: Chris Lucian && Chad Davies
 // Class: CS 537
-// Date: 3/29/2015
-// Assignment: 2
+// Date: 4/28/2015
+// Assignment: 3
 
 #include <stdio.h>
 #include <string.h>
@@ -23,14 +23,18 @@ int main(int argc, char *argv[]) {
     // string message_string = "Hello Wolds I am here to be awesome.";
 
     //Argument Validation
-    if (argc < 3) {
-       fprintf(stderr,"usage %s <hostname> <port>\n", argv[0]);
+    if (argc < 4) {
+       fprintf(stderr,"usage %s <hostname> <port> <test_mode>\n", argv[0]);
        exit(0);
     }
 
     //Assign the arguments to well-named variables
     string ipAddress = argv[1];
     int port = atoi(argv[2]);
+    char* test_mode = argv[3];
+
+    printf("test_mode: %s", test_mode);
+
 
     // Setup server address.
     serverAddress.sin_family = AF_INET;

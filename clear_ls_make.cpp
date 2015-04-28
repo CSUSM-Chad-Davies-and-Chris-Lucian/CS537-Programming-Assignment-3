@@ -1,7 +1,7 @@
 // Names: Chris Lucian && Chad Davies
 // Class: CS 537
-// Date: 3/29/2015
-// Assignment: 2
+// Date: 4/28/2015
+// Assignment: 3
 
 #include <cstdlib>
 #include <stdio.h>
