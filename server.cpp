@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
     int port = atoi(argv[1]);
     char* test_mode = argv[2];
-    printf("test_mode: %s", test_mode);
+    printf("SERVER test_mode: \e[93m%s\e[0m\n", test_mode);
 
     // Initialize server socket information.
     serverAddress.sin_family = AF_INET;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     // Receive data of buffer length from the client using RDT.
     printf("SERVER beforerecieve\n");
     rdt_recv(socketDescriptor, buffer, bufferLength, 0, (struct sockaddr *) &clientAddress, &sizeClientAddress);
-    printf("SERVER Recieved %s\n" , buffer );
+    //printf("SERVER Recieved %s\n" , buffer );
 
     printf("SERVER afterrecieve\n");
 

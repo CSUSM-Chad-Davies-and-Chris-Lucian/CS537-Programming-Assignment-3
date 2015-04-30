@@ -35,6 +35,8 @@ int main(int argc, char *argv[]) {
     string port1;
     port1 = argv[1];
 
+    run_tests_with_test_mode(port1, "Checksum");
+    run_tests_with_test_mode(port1, "Timeout");
     run_tests_with_test_mode(port1, "None");
 
     return 0;

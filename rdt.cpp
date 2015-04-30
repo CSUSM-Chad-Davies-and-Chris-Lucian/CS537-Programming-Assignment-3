@@ -72,7 +72,7 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
     // Convert buffer into packet struct.
     memcpy(&packets[i], local_buffer, PACKET_SIZE);
 
-     printf("RDT Received Packed Data %s\n\n\n", packets[i].data);
+     //printf("RDT Received Packed Data %s\n\n\n", packets[i].data);
 
   }
 
@@ -98,7 +98,7 @@ void copy_packets_to_buffer(packet* packets, char* buffer, int num_packets, int 
 
   // Null terminate end of message.
   buffer[buffer_length] = '\0';
-    printf("RDT Received Message %s\n\n\n", buffer);
+    //printf("RDT Received Message %s\n\n\n", buffer);
 }
 
 // Calls all the functions needed to receive packets over RDT.

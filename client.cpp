@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <stdlib.h>
+#include "test_data.h"
 
 using namespace std;
 
@@ -19,9 +20,8 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in serverAddress;
 
     // Test files.
-    string message_string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi hendrerit erat a nunc facilisis varius. Sed lectus mi, egestas eget auctor eu, elementum eget justo. Mauris lacinia viverra mi, at pretium ante iaculis bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum condimentum lobortis justo id varius. Mauris quis mi lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sed sagittis diam. Aenean elementum elementum massa at sagittis. Suspendisse euismod magna ut pulvinar tempor. Morbi ultricies enim eros, non feugiat neque sollicitudin sed. Mauris nec viverra neque.Nulla facilisi. Quisque pharetra pellentesque tristique. Phasellus et lectus ac lacus elementum lacinia ac ut nisi. Vivamus ornare purus vulputate, aliquam risus nec, facilisis metus. Donec eu elit et diam dignissim placerat euismod a lorem. Nullam sed neque consectetur, tristique tellus ac, molestie ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper hendrerit ligula, nec convallis est nullam.";
     // string message_string = "Hello Wolds I am here to be awesome.";
-
+    string message_string = get_message_string();
     //Argument Validation
     if (argc < 4) {
        fprintf(stderr,"usage %s <hostname> <port> <test_mode>\n", argv[0]);
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     int port = atoi(argv[2]);
     char* test_mode = argv[3];
 
-    printf("test_mode: %s", test_mode);
+    printf("CLIENT test_mode: \e[94m%s\e[0m\n", test_mode);
 
 
     // Setup server address.
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
     int serverAddressLength = sizeof(serverAddress);
 
     // User RTD 1.0 to send the message.
-    printf("CLIENT Sending string length %d\n", strlen(message_string.c_str()));
+    //printf("CLIENT Sending string length %d\n", strlen(message_string.c_str()));
     rdt_sendto(socketDescriptor, const_cast<char*>(message_string.c_str()), strlen(message_string.c_str()), 0,(struct sockaddr *) &serverAddress, serverAddressLength);
     printf("CLIENT sendto done\n");
 
