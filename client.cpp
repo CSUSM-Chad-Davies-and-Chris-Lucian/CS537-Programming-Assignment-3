@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     string ipAddress = argv[1];
     int port = atoi(argv[2]);
     char* test_mode = argv[3];
-
+    set_rdt_test_mode(test_mode);
     printf("CLIENT test_mode: \e[94m%s\e[0m\n", test_mode);
 
 

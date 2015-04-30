@@ -6,11 +6,11 @@
 #include "rdt.h"
 #include <errno.h>
 
-bool test_mode;
+static char* rdt_test_mode = "None";
 
-void enable_test_mode()
+void set_rdt_test_mode(char* test_mode)
 {
-   test_mode = true;
+  rdt_test_mode = test_mode;
 }
 
 // Create udp socket for rdt connection
@@ -128,6 +128,14 @@ packet* copy_buffer_to_packets(int num_packets, char *buffer, int buffer_length)
   //Create array of packets to send
   packet* packets = new packet[num_packets];
 
+  //Corrupt checksum if testing checksum
+  if(strcmp(rdt_test_mode,"CheckSum") == 0)
+  {
+    buffer[0]  = 'z';
+    printf("\e[91mRDT TEST MODE CORRUPTING CHECKSUM\e[0m\n");
+  }
+
+
   //Fill packet array with data
   for(int i = 0; i < num_packets; i++)
   {
@@ -150,6 +158,9 @@ packet* copy_buffer_to_packets(int num_packets, char *buffer, int buffer_length)
 // User UDP to send packets across the network.
 void send_packets(int socket_descriptor,char *buffer,int buffer_length,int flags,struct sockaddr * destination_address,int address_length, int num_packets, packet* packets)
 {
+
+
+
   //Send packets
   for(int i = 0; i < num_packets; i++)
   {

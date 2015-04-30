@@ -18,6 +18,8 @@ void run_tests_with_test_mode(string port1, string test_mode)
   system("ps | grep server | awk '{print $1}' | xargs kill");
   system("ps | grep client | awk '{print $1}' | xargs kill");
 
+  printf("\n\n\n");
+
   // construct the server command and start the test
   printf("\nTESTS: Starting Server App\n");
   string command = "./server " + port1 + " " + test_mode + " &";
@@ -27,6 +29,9 @@ void run_tests_with_test_mode(string port1, string test_mode)
   printf("\nTESTS: Starting Client App %d\n",index);
   string command2 = "./client localhost " + port1 + " " + test_mode + " &";
   system(command2.c_str());
+
+  printf("\n\n\n");
+
 }
 
 // this program automates the testing of the two applications with a single
@@ -35,9 +40,14 @@ int main(int argc, char *argv[]) {
     string port1;
     port1 = argv[1];
 
-    run_tests_with_test_mode(port1, "Checksum");
-    run_tests_with_test_mode(port1, "Timeout");
-    run_tests_with_test_mode(port1, "None");
-
+    run_tests_with_test_mode(port1, "CheckSum");
+    printf("\n\n\n");
+    sleep(1);
+    //run_tests_with_test_mode(port1, "TimeOut");
+    //printf("\n\n\n");
+    //sleep(1);
+    //run_tests_with_test_mode(port1, "None");
+    //printf("\n\n\n");
+    //sleep(1);
     return 0;
 }
