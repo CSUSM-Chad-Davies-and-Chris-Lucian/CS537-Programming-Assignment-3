@@ -9,11 +9,14 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "test_data.h"
 
 using namespace std;
 
 // A simple test server meant to receive a file from the client.
 int main(int argc, char *argv[]) {
+
+    string message_string = get_message_string();
 
     // Test buffer lengths.
     int bufferLength = 1050;
@@ -50,6 +53,16 @@ int main(int argc, char *argv[]) {
     printf("SERVER beforerecieve\n");
     rdt_recv(socketDescriptor, buffer, bufferLength, 0, (struct sockaddr *) &clientAddress, &sizeClientAddress);
     //printf("SERVER Recieved %s\n" , buffer );
+
+    string result_message_string(buffer);
+    if(message_string.compare(result_message_string) == 0)
+    {
+        printf("SERVER \e[92mCompare Successful!\e[0m\n");
+    }
+    else
+    {
+        printf("SERVER \e[91mCompare NOT Successful!\e[0m\n");
+    }
 
     printf("SERVER afterrecieve\n");
 
