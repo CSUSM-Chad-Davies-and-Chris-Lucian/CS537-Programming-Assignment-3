@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in serverAddress;
 
     // Test files.
-    // string message_string = "Hello Wolds I am here to be awesome.";
+    //string message_string = "Hello Wolds I am here to be awesome.";
     string message_string = get_message_string();
     //Argument Validation
     if (argc < 4) {

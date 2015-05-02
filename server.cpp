@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
     string message_string = get_message_string();
 
     // Test buffer lengths.
-    int bufferLength = 1050;
-    // int bufferLength = 36;
+    int bufferLength = message_string.length();
+    //int bufferLength = 36;
     // Server and client addresses.
     struct sockaddr_in serverAddress, clientAddress;
     int sizeClientAddress = sizeof(clientAddress);
@@ -65,6 +65,8 @@ int main(int argc, char *argv[]) {
     {
         printf("SERVER \e[91mCompare NOT Successful!\e[0m\n");
     }
+
+    cout << "messagestring: " << result_message_string << endl;
 
     printf("SERVER afterrecieve\n");
 
