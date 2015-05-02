@@ -13,6 +13,29 @@ void set_rdt_test_mode(char* test_mode)
   rdt_test_mode = test_mode;
 }
 
+uint16_t get_checksum(char* buffer)
+{
+  uint16_t cksum = 0;
+
+  for(int i = 0; i < strlen(buffer); i++)
+  {
+    int m = buffer[i];
+    cksum += m;
+  }
+
+  cksum = ~cksum;
+  cksum = cksum + 1;
+
+  return cksum;
+}
+
+bool checksum_is_valid(char* buffer, uint16_t cksum)
+{
+  uint16_t buffer_cksum = get_checksum(buffer);
+
+  return buffer_cksum == cksum;
+}
+
 // Create udp socket for rdt connection
 int rdt_socket(int address_family, int type, int protocol)
 {

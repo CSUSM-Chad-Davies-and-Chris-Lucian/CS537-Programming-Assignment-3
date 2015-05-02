@@ -28,7 +28,7 @@ client: client.cpp
 
 #build tests
 tests: tests.cpp
-	gcc -lstdc++ -o tests tests.cpp
+	gcc -lstdc++ -o tests tests.cpp librdt.a -I/
 
 #build the "make clear ls make"
 clear_ls_make: clear_ls_make.cpp

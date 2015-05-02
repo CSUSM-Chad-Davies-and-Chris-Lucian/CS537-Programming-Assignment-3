@@ -34,6 +34,9 @@ typedef struct packet packet_t;
 
 void set_rdt_test_mode(char* test_mode);
 
+uint16_t get_checksum(char* buffer);
+bool checksum_is_valid(char* buffer, uint16_t cksum);
+
 //The rdt_socket() function is used to create an end point for communications.
 int rdt_socket(int address_family, int type, int protocol);
 

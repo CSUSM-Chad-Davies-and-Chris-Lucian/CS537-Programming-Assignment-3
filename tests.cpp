@@ -5,9 +5,11 @@
 
 #include <cstdlib>
 #include <stdio.h>
+#include "rdt.h"
 #include <unistd.h>
 #include <string.h>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -34,15 +36,44 @@ void run_tests_with_test_mode(string port1, string test_mode)
 
 }
 
+void test_checksum(char* buffer, uint16_t expected)
+{
+  if(get_checksum(buffer) == expected)
+  {
+    printf("\e[92mChecksum Successful!\e[0m\n");
+  }
+  else
+  {
+    printf("\e[91mNot Checksum Successful!\e[0m\n");
+  }
+}
+
+void test_checksum_is_valid(char* buffer, uint16_t cksum, bool expected)
+{
+  if(checksum_is_valid(buffer, cksum) == expected)
+  {
+    printf("\e[92mChecksum is Valid Successful!\e[0m\n");
+  }
+  else
+  {
+    printf("\e[91mNot Checksum is Not Valid Successful!\e[0m\n");
+  }
+}
+
 // this program automates the testing of the two applications with a single
 // argument of a port
 int main(int argc, char *argv[]) {
     string port1;
     port1 = argv[1];
 
-    run_tests_with_test_mode(port1, "CheckSum");
-    printf("\n\n\n");
-    sleep(1);
+    test_checksum("pick", 65113);
+    test_checksum("lol", 65209);
+    test_checksum_is_valid("lol", 11245, false);
+    test_checksum_is_valid("lol", 65209, true);
+
+    //run_tests_with_test_mode(port1, "CheckSum");
+    //printf("\n\n\n");
+    //sleep(1);
     //run_tests_with_test_mode(port1, "TimeOut");
     //printf("\n\n\n");
     //sleep(1);
