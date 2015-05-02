@@ -5,10 +5,10 @@
 
 #include <cstdlib>
 #include <stdio.h>
-#include "rdt.h"
-#include <unistd.h>
-#include <string.h>
 #include <string>
+#include "rdt.h"
+#include "test_data.h"
+#include <unistd.h>
 #include <iostream>
 
 using namespace std;
@@ -71,9 +71,11 @@ int main(int argc, char *argv[]) {
     test_checksum_is_valid("lol", 11245, false);
     test_checksum_is_valid("lol", 65209, true);
 
-    //run_tests_with_test_mode(port1, "CheckSum");
-    //printf("\n\n\n");
-    //sleep(1);
+    printf("\n\n\n");
+
+    run_tests_with_test_mode(port1, get_checksum_testmode());
+    printf("\n\n\n");
+    sleep(1);
     //run_tests_with_test_mode(port1, "TimeOut");
     //printf("\n\n\n");
     //sleep(1);

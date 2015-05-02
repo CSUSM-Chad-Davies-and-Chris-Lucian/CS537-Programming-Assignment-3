@@ -16,7 +16,6 @@ extern "C" {
 #include <arpa/inet.h>
 #include <unistd.h>
 
-
 // Size of the data inside a packet.
 const int PACKET_DATA_SIZE = 500;
 // Size of a packet.

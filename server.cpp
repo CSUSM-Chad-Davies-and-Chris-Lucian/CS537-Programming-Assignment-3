@@ -4,12 +4,11 @@
 // Assignment: 3
 
 #include <stdio.h>
-#include <string.h>
-#include "rdt.h"
 #include <string>
+#include "rdt.h"
+#include "test_data.h"
 #include <iostream>
 #include <fstream>
-#include "test_data.h"
 
 using namespace std;
 

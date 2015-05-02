@@ -152,7 +152,7 @@ packet* copy_buffer_to_packets(int num_packets, char *buffer, int buffer_length)
   packet* packets = new packet[num_packets];
 
   //Corrupt checksum if testing checksum
-  if(strcmp(rdt_test_mode,"CheckSum") == 0)
+  if(strcmp(rdt_test_mode, "CheckSum") == 0)
   {
     buffer[0]  = 'z';
     printf("\e[91mRDT TEST MODE CORRUPTING CHECKSUM\e[0m\n");
