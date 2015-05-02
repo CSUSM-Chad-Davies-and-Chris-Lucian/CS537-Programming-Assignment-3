@@ -4,11 +4,14 @@
 // Assignment: 3
 
 #include <stdio.h>
+#ifndef STRING_H
+#define STRING_H
 #include <string>
-#include "rdt.h"
-#include "test_data.h"
+#endif
 #include <iostream>
 #include <fstream>
+#include "rdt.h"
+#include "test_data.h"
 
 using namespace std;
 

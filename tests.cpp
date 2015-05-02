@@ -5,11 +5,14 @@
 
 #include <cstdlib>
 #include <stdio.h>
+#ifndef STRING_H
+#define STRING_H
 #include <string>
-#include "rdt.h"
-#include "test_data.h"
+#endif
 #include <unistd.h>
 #include <iostream>
+#include "rdt.h"
+#include "test_data.h"
 
 using namespace std;
 

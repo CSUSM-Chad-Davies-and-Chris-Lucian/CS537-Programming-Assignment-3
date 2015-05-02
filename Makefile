@@ -20,15 +20,15 @@ librdt: rdt.cpp
 
 #build the server
 server: server.cpp
-	gcc -lstdc++ -o server server.cpp -pthread librdt.a -I/
+	gcc -lstdc++ -o server server.cpp test_data.cpp -pthread librdt.a -I/
 
 #build the client
 client: client.cpp
-	gcc -lstdc++ -o client client.cpp -pthread -lrt -lpthread librdt.a -I/
+	gcc -lstdc++ -o client client.cpp test_data.cpp -pthread -lrt -lpthread librdt.a -I/
 
 #build tests
 tests: tests.cpp
-	gcc -lstdc++ -o tests tests.cpp librdt.a -I/
+	gcc -lstdc++ -o tests tests.cpp test_data.cpp librdt.a -I/
 
 #build the "make clear ls make"
 clear_ls_make: clear_ls_make.cpp

@@ -3,8 +3,8 @@
 // Date: 4/28/2015
 // Assignment: 3
 
-#include "rdt.h"
 #include <errno.h>
+#include "rdt.h"
 
 static char* rdt_test_mode = "None";
 
@@ -151,28 +151,31 @@ packet* copy_buffer_to_packets(int num_packets, char *buffer, int buffer_length)
   //Create array of packets to send
   packet* packets = new packet[num_packets];
 
-  //Corrupt checksum if testing checksum
-  if(strcmp(rdt_test_mode, "CheckSum") == 0)
-  {
-    buffer[0]  = 'z';
-    printf("\e[91mRDT TEST MODE CORRUPTING CHECKSUM\e[0m\n");
-  }
-
-
   //Fill packet array with data
   for(int i = 0; i < num_packets; i++)
   {
+    packet single_packet = packets[i];
+
     for(int d = 0; d < PACKET_DATA_SIZE; d++)
     {
       int data_index = i * PACKET_DATA_SIZE + d;
       if(data_index < buffer_length)
       {
-        packets[i].data[d] = buffer[data_index];
+        single_packet.data[d] = buffer[data_index];
       }
       else
       {
-        packets[i].data[d] = '\0';
+        single_packet.data[d] = '\0';
       }
+    }
+    single_packet.cksum = get_checksum(single_packet.data);
+
+    //Corrupt data checksum if testing checksum
+    if(strcmp(rdt_test_mode, get_checksum_testmode().c_str()) == 0)
+    {
+      single_packet.data[0]  = 'z';
+      printf("\e[91mRDT TEST MODE CORRUPTING CHECKSUM\e[0m\n");
+      set_rdt_test_mode((char*)get_none_testmode().c_str());
     }
   }
   return packets;

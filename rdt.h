@@ -3,18 +3,25 @@
 // Date: 4/28/2015
 // Assignment: 3
 
-// Guard against linking errors.
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include <stdio.h>
 #include <stdint.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <string.h> //memset
+#ifndef STRING_H
+#define STRING_H
+#include <string>
+#endif
 #include <stdlib.h> //exit(0);
 #include <arpa/inet.h>
 #include <unistd.h>
+#include "test_data.h"
+
+// Guard against linking errors.
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 // Size of the data inside a packet.
 const int PACKET_DATA_SIZE = 500;
