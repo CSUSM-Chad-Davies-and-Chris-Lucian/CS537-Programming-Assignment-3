@@ -125,7 +125,22 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
       }
 
       int errno;
-      int sendToSuccess = sendto(socket_descriptor, &ack, 1, flags, from_address, (socklen_t)*address_length);
+
+
+      printf("Test Mode is: %s\n", rdt_test_mode);
+
+      if(strcmp(rdt_test_mode, get_timeout_testmode().c_str()) == 0)
+      {
+        set_rdt_test_mode((char*)get_none_testmode().c_str());
+
+        printf("\e[91mForcing Test Timeout: Sleeping For 3 Seconds\e[0m\n");
+        sleep(3);
+        ack = false;
+      }
+      else
+      {
+        int sendToSuccess = sendto(socket_descriptor, &ack, 1, flags, from_address, (socklen_t)*address_length);
+      }
     }
 
      //printf("RDT Received Packed Data %s\n\n\n", packets[i].data);
@@ -240,8 +255,28 @@ void send_packets(int socket_descriptor,char *buffer,int buffer_length,int flags
       {
           printf("RDT Couldn't be sent.\n");
       }
+
+      struct timeval tv;
+      fd_set readfds;
+
+      FD_ZERO(&readfds);
+      FD_SET(socket_descriptor, &readfds);
+
+      tv.tv_sec = 2;
+      tv.tv_usec = 0;
+
+      int rv = select(socket_descriptor + 1, &readfds, NULL, NULL, &tv);
+
+
       single_packet->data[0] = temp;
-      int recieveLength = recvfrom(socket_descriptor, &ack, 1, flags, destination_address, (socklen_t*)&address_length);
+      if(rv == 1)
+      {
+        int recieveLength = recvfrom(socket_descriptor, &ack, 1, flags, destination_address, (socklen_t*)&address_length);
+      }
+      else
+      {
+        printf("\e[91mTime Expiered! \e[0m\n");
+      }
     }
   }
 }

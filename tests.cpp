@@ -76,14 +76,14 @@ int main(int argc, char *argv[]) {
 
     printf("\n\n\n");
 
+    run_tests_with_test_mode(port1, get_none_testmode());
+    printf("\n\n\n");
+    sleep(1);
     run_tests_with_test_mode(port1, get_checksum_testmode());
     printf("\n\n\n");
     sleep(1);
-    //run_tests_with_test_mode(port1, "TimeOut");
-    //printf("\n\n\n");
-    //sleep(1);
-    //run_tests_with_test_mode(port1, "None");
-    //printf("\n\n\n");
-    //sleep(1);
+    run_tests_with_test_mode(port1, get_timeout_testmode());
+    printf("\n\n\n");
+    sleep(1);
     return 0;
 }

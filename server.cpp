@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
     int port = atoi(argv[1]);
     char* test_mode = argv[2];
     printf("SERVER test_mode: \e[93m%s\e[0m\n", test_mode);
+    set_rdt_test_mode(test_mode);
 
     // Initialize server socket information.
     serverAddress.sin_family = AF_INET;
