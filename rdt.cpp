@@ -11,11 +11,13 @@ using namespace std;
 
 static char* rdt_test_mode = "None";
 
+//Sets the test mode, accepts "None", "Checksum", and "Timeout"
 void set_rdt_test_mode(char* test_mode)
 {
   rdt_test_mode = test_mode;
 }
 
+//Gets the checksum value for a buffer
 uint16_t get_checksum(char* buffer)
 {
   uint16_t cksum = 0;
@@ -39,6 +41,7 @@ uint16_t get_checksum(char* buffer)
   return cksum;
 }
 
+//validated a checksum for a buffer
 bool checksum_is_valid(char* buffer, uint16_t cksum)
 {
   uint16_t buffer_cksum = get_checksum(buffer);
@@ -93,10 +96,9 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
   {
     bool ack = false;
 
+    //Loop until ack recieved
     while(!ack)
     {
-
-
       // Use UDP to populate the buffer.
       char local_buffer[PACKET_SIZE];
       int recieveLength = recvfrom(socket_descriptor, &local_buffer, PACKET_SIZE, flags, from_address, (socklen_t*)address_length);
@@ -114,7 +116,7 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
       packet single_packet = packets[i];
 
       ack = checksum_is_valid(single_packet.data, single_packet.cksum);
-
+      //print green text if valid, print red if invlaid
       if(ack)
       {
         printf("\e[92mRDT Packet Is Valid\e[0m\n");
@@ -126,9 +128,10 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
 
       int errno;
 
-
+      //Print the current test mode
       printf("Test Mode is: %s\n", rdt_test_mode);
 
+      //force a timeout when timeout test mode is enabled
       if(strcmp(rdt_test_mode, get_timeout_testmode().c_str()) == 0)
       {
         set_rdt_test_mode((char*)get_none_testmode().c_str());
@@ -142,13 +145,9 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
         int sendToSuccess = sendto(socket_descriptor, &ack, 1, flags, from_address, (socklen_t)*address_length);
       }
     }
-
-     //printf("RDT Received Packed Data %s\n\n\n", packets[i].data);
-
   }
 
   return packets;
-
 }
 
 // Copy packets into a buffer.
@@ -170,7 +169,6 @@ void copy_packets_to_buffer(packet* packets, char* buffer, int num_packets, int 
 
   // Null terminate end of message.
   buffer[buffer_length] = '\0';
-    //printf("RDT Received Message %s\n\n\n", buffer);
 }
 
 // Calls all the functions needed to receive packets over RDT.

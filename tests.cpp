@@ -16,6 +16,7 @@
 
 using namespace std;
 
+//Runs the client and server with a given port and testmode
 void run_tests_with_test_mode(string port1, string test_mode)
 {
   // kill all clients and servers before executing a test
@@ -39,6 +40,7 @@ void run_tests_with_test_mode(string port1, string test_mode)
 
 }
 
+//Tests the checksum to validate the value
 void test_checksum(char* buffer, uint16_t expected)
 {
   if(get_checksum(buffer) == expected)
@@ -51,6 +53,7 @@ void test_checksum(char* buffer, uint16_t expected)
   }
 }
 
+//Tests the checksum validator value
 void test_checksum_is_valid(char* buffer, uint16_t cksum, bool expected)
 {
   if(checksum_is_valid(buffer, cksum) == expected)
@@ -69,13 +72,17 @@ int main(int argc, char *argv[]) {
     string port1;
     port1 = argv[1];
 
+    //Test checksums
     test_checksum("pick", 65113);
     test_checksum("lol", 65209);
+
+    //Test checksum validator
     test_checksum_is_valid("lol", 11245, false);
     test_checksum_is_valid("lol", 65209, true);
 
     printf("\n\n\n");
 
+    //Test each test mode
     run_tests_with_test_mode(port1, get_none_testmode());
     printf("\n\n\n");
     sleep(1);

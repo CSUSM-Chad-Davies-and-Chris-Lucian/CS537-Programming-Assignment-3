@@ -57,6 +57,8 @@ int main(int argc, char *argv[]) {
     rdt_recv(socketDescriptor, buffer, bufferLength, 0, (struct sockaddr *) &clientAddress, &sizeClientAddress);
     //printf("SERVER Recieved %s\n" , buffer );
 
+
+    //Compare the results with the globally defined string to verify contents
     string result_message_string(buffer);
     if(message_string.compare(result_message_string) == 0)
     {

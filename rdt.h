@@ -39,9 +39,13 @@ struct packet {
 };
 typedef struct packet packet_t;
 
+//Sets the test mode, accepts "None", "Checksum", and "Timeout"
 void set_rdt_test_mode(char* test_mode);
 
+//Get the checksum value
 uint16_t get_checksum(char* buffer);
+
+//Validate the checksum against a buffer
 bool checksum_is_valid(char* buffer, uint16_t cksum);
 
 //The rdt_socket() function is used to create an end point for communications.
