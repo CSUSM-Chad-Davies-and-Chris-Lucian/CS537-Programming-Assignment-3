@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
     sleep(1);
     run_tests_with_test_mode(port1, get_checksum_testmode());
     printf("\n\n\n");
-    sleep(3);
+    sleep(1);
     run_tests_with_test_mode(port1, get_timeout_testmode());
     printf("\n\n\n");
     sleep(1);
