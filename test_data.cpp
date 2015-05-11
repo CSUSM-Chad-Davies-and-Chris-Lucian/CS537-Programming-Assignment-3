@@ -32,3 +32,9 @@ std::string get_none_testmode()
   static std::string word("None");
   return word;
 }
+
+std::string get_invalid_sequence_testmode()
+{
+  static std::string word("InvalidSequence");
+  return word;
+}

@@ -19,6 +19,8 @@ std::string get_message_string();
 //Get the checksum test mode
 std::string get_checksum_testmode();
 
+std::string get_invalid_sequence_testmode();
+
 //Get the timeout test mode
 std::string get_timeout_testmode();
 
