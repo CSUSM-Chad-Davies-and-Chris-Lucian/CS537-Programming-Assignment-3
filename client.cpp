@@ -54,5 +54,6 @@ int main(int argc, char *argv[]) {
     printf("CLIENT sendto done\n");
 
     rdt_close(socketDescriptor);
+    sleep(1);
     return 0;
 }

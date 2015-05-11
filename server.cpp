@@ -75,5 +75,6 @@ int main(int argc, char *argv[]) {
 
     // Close the RDT socket.
     rdt_close(socketDescriptor);
+    sleep(1);
     return 0;
 }

@@ -73,27 +73,27 @@ int main(int argc, char *argv[]) {
     port1 = argv[1];
 
     //Test checksums
-    //test_checksum("pick", 65113);
-    //test_checksum("lol", 65209);
+    test_checksum("pick", 65113);
+    test_checksum("lol", 65209);
 
     //Test checksum validator
-    //test_checksum_is_valid("lol", 11245, false);
-    //test_checksum_is_valid("lol", 65209, true);
+    test_checksum_is_valid("lol", 11245, false);
+    test_checksum_is_valid("lol", 65209, true);
 
     printf("\n\n\n");
 
     //Test each test mode
-    //run_tests_with_test_mode(port1, get_none_testmode());
-    //printf("\n\n\n");
-    //sleep(1);
+    run_tests_with_test_mode(port1, get_none_testmode());
+    printf("\n\n\n");
+    sleep(1);
     run_tests_with_test_mode(port1, get_invalid_sequence_testmode());
     printf("\n\n\n");
     sleep(1);
-    //run_tests_with_test_mode(port1, get_checksum_testmode());
-    //printf("\n\n\n");
-    //sleep(1);
-    //run_tests_with_test_mode(port1, get_timeout_testmode());
-    //printf("\n\n\n");
-    //sleep(1);
+    run_tests_with_test_mode(port1, get_checksum_testmode());
+    printf("\n\n\n");
+    sleep(3);
+    run_tests_with_test_mode(port1, get_timeout_testmode());
+    printf("\n\n\n");
+    sleep(1);
     return 0;
 }

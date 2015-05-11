@@ -146,23 +146,25 @@ packet* recv_buffer_to_packets(int num_packets, int socket_descriptor,char *buff
       }
       else
       {
-        packet* ack_packet = new packet;
-        ack_packet->ackno = single_packet.seqno;
-        ack_packet->seqno = single_packet.seqno;
-
-        int sendToSuccess = sendto(socket_descriptor, ack_packet, PACKET_SIZE, flags, from_address, (socklen_t)*address_length);
-
-        if(current_seqno != single_packet.seqno)
+        if(ack)
         {
-          printf("\e[91mInvalid Sequence Number: Deleting Packet\e[0m\n");
-          //This is not the right packet, delete it and try again;
-          i--;
-          continue;
-        }
+          packet* ack_packet = new packet;
+          ack_packet->ackno = single_packet.seqno;
+          ack_packet->seqno = single_packet.seqno;
 
-        //flip between 1 and 0
-        current_seqno = 1 - current_seqno;
-        ack = true;
+          int sendToSuccess = sendto(socket_descriptor, ack_packet, PACKET_SIZE, flags, from_address, (socklen_t)*address_length);
+
+          if(current_seqno != single_packet.seqno)
+          {
+            printf("\e[91mInvalid Sequence Number: Deleting Packet\e[0m\n");
+            //This is not the right packet, delete it and try again;
+            i--;
+            continue;
+          }
+
+          //flip between 1 and 0
+          current_seqno = 1 - current_seqno;
+        }
       }
     }
   }
@@ -273,7 +275,7 @@ void send_packets(int socket_descriptor,char *buffer,int buffer_length,int flags
       single_packet->cksum = get_checksum(single_packet->data);
       single_packet->seqno = current_seqno;
 
-      current_seqno = 1 - current_seqno;
+
 
       temp = single_packet->data[0];
       //Corrupt data checksum if testing checksum
@@ -314,6 +316,7 @@ void send_packets(int socket_descriptor,char *buffer,int buffer_length,int flags
         int recieveLength = recvfrom(socket_descriptor, &local_buffer, PACKET_SIZE, flags, destination_address, (socklen_t*)&address_length);
         memcpy(&ack_packet, local_buffer, PACKET_SIZE);
         printf("recieced ack %d\n", ack_packet.ackno);
+        current_seqno = 1 - current_seqno;
       }
       else
       {
